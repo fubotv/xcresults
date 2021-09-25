@@ -58,7 +58,8 @@ public class Allure2ExportFormatter implements ExportFormatter {
         if (node.has(IDENTIFIER)) {
             String identifier = node.get(IDENTIFIER).get(VALUE).asText();
             identifier = identifier.substring(0,identifier.length()-2).replace("/test", "/");
-            result.setHistoryId(getHistoryId(meta, identifier));
+            meta.label(SUITE, identifier.substring(0, identifier.indexOf("/")));
+            result.setHistoryId(identifier);
             result.setFullName(identifier);
         }
         if (node.has(STATUS)) {
