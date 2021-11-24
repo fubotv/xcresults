@@ -52,11 +52,14 @@ public class Allure2ExportFormatter implements ExportFormatter {
                 .setSteps(new ArrayList<>())
                 .setAttachments(new ArrayList<>());
         if (node.has(NAME)) {
-            result.setName(node.get(NAME).get(VALUE).asText());
+            final String name = node.get(NAME).get(VALUE).asText();
+            result.setName(name.substring(0,name.length()-2).substring(4));
         }
         if (node.has(IDENTIFIER)) {
-            final String identifier = node.get(IDENTIFIER).get(VALUE).asText();
-            result.setHistoryId(getHistoryId(meta, identifier));
+            String identifier = node.get(IDENTIFIER).get(VALUE).asText();
+            identifier = identifier.substring(0,identifier.length()-2).replace("/test", "/");
+            meta.label(SUITE, identifier.substring(0, identifier.indexOf("/")));
+            result.setHistoryId(identifier);
             result.setFullName(identifier);
         }
         if (node.has(STATUS)) {
