@@ -25,3 +25,9 @@ Below are a few examples of common commands. For further assistance, use the --h
 After that you can generate Allure report by following command: 
 
 `allure serve /path/to/outputDirectory`
+
+## Build executable `xcresults` file
+
+Run following command in a terminal:
+
+`./gradlew build && ./gradlew nativeImage && chmod -x ./build/graal/xcresults`
